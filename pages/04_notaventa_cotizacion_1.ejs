@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+
+
+
+
+
+
+  <div class="ventanapdf">
+
+
+<!-- 
+    <div class="row ">
+      <div class="col-2">
+        <a class="navbar-brand" href="#">
+          <img src="/img/logo2.jpg" class="navbar-brand-img" alt="" height="150" class="d-inline-block align-text-top">
+          
+        </a>
+      </div>
+      <div class="col-3">
+
+      </div>
+      <div class="col-3 d-flex align-items-center">
+        <h1>COTIZACION</h1>
+      </div>
+      <div class="col-3">
+      </div>
+
+      <div class="col-1">
+       
+      </div> -->
+    </div>
+    <div class="row ">
+      <div class="col-12 border-top border-light-subtle">
+    <br>
+  </div>
+</div>
+    <div class="row " style="padding-left: 25px">
+
+      <div class="col-6 "> 
+        <form action="../pdfcotizacion/<%= notaventa._id %>">
+          <input type="submit" value="PDF-1" />
+          <form action="../pdfcotizacion2/<%= notaventa._id %>">
+            <input type="submit" value="PDF-2" />
+          </form>
+        </form>
+       
+        <h5>
+          <%= org.razonsocial %>
+        </h5>
+        <h5>
+          <%= org.adireccion %>
+        </h5>
+        <h5>
+          <%= org.acp %>-<%= org.aciudad %>-<%=org.aprovincia%>-<%=org.apais %>
+                  </h5>
+                  <h5> Att. <%= notaventa.string02 %>
+                  </h5>
+
+
+      </div>
+
+      <div class="col-2 "></div>
+      <div class="col-4 ">
+        <h5>Bella Italia, <%= notaventa.string03 %>
+        </h5>
+      
+      </div>
+    </div>
+
+
+
+    <br>
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="col-12 ">
+        <table class="table table-striped   ">
+          <thead>
+            <tr class="text-uppercase text-black text-lg font-weight-bolder opacity-100 d-flex ">
+              <th class="col-1 font-sizes">
+                <h5>Cant</h5>
+              </th>
+       
+              <th class="col-10 ">
+                <h5> Descripcion</h5>
+              </th>
+              <th class="col-1 ">
+                <h5> Precio U$S</h5>
+              
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <% var i=0;notaventa.itemagregado.forEach(element=> { %>
+
+              <tr class=" text-black text-lg font-weight-bolder opacity-100 d-flex ">
+
+                <% if(element.tipoitem=='Título' ){ %>
+                  <td class="col-12 text-success">
+                    <h4 class="text-uppercase ">-<%= element.observacion%>
+                    </h4>
+                  </td>
+                  <% } else { %>
+
+
+                    <td class="col-1">
+                      <h6>
+                        <%= element.cant %> <%= element.unidad %>
+                      </h6>
+                    </td>
+                   
+                    <td class="col-10">
+                      <h6>
+                        <%= element.cotizaciontitulo %> (Cod. <%= element.iditemcompra %> / <%= element.nombre %> ): <%= element.cotizaciondetails %> 
+                        <% if(element.vseccion!=""){%>-Sección:<%= element.vseccion%><%}%>
+                        <% if(element.vdiametro!=""){%>-Diámetro:<%= element.vdiametro%><%}%>
+                        <% if(element.vlongitud!=""){%>-Longitud:<%= element.vlongitud%><%}%>
+                        <% if(element.vancho!=""){%>-Ancho:<%=element.vancho %><%}%>
+                        <% if(element.valtura!=""){%>-Altura:<%=element.valtura%><%}%>
+                        <% if(element.vdimension!=""){%>-Dimensiones:<%= element.vdimension%><%}%>
+                        <% if(element.vinclinacion!=""){%>-Inclinación:<%= element.vinclinacion%><%}%>
+                        <% if(element.vpendiente!=""){%>-Pendiente:<%= element.vpendiente%><%}%>
+                        <% if(element.vaccionamiento!=""){%>-Accionamiento:<%= element.vaccionamiento%><%}%>
+                        <% if(element.vmando!=""){%>-Mando:<%= element.vmando%><%}%>
+                        <% if(element.vmotor!=""){%>-Motor:<%= element.vmotor%><%}%>
+                        <% if(element.vcapacidadproduccion!="" ){ %>=-Capacidad de producción: <%= element.vcapacidadproduccion  %> <% } %>
+                        <% if(element.vcapacidadutil!=""){%>-Capacidad útil:<%= element.vcapacidadutil%><%}%>
+                        <% if(element.vcapacidadtotal!=""){ %>-Capacidad total:<%= element.vcapacidadtotal%><%}%>
+                        <% if(element.ventrada!=""){%>-Entrada:<%= element.ventrada%><%}%>
+                        <% if(element.vsalida!=""){%>-Salida:<%= element.vsalida%><%}%>
+                        <% if(element.vtension!=""){ %>-Tensión: <%= element.vtension%><%}%>
+                        <% if(element.vpotencia!=""){ %>-Potencia:<%= element.vpotencia%><%}%>
+                        <% if(element.vmaterial!=""){%>-Material:<%= element.vmaterial%><%}%>
+                        <% if(element.vtratamiento!=""){%>-Tratamiento:<%= element.vtratamiento%><%}%>
+                        <% if(element.vterminacion!=""){%>-Terminacion:<%= element.vterminacion%><%}%>
+                        <% if(element.vpeso!=""){%>-Peso:<%=element.vpeso%><%}%>
+                        <% if(element.cotizacionnota!=""){%><%= element.cotizacionnota%><%}%>
+
+                      </h6>
+
+
+
+
+
+                    </td>
+                    <td class="col-1 ">
+                      <h6>
+                        <%= element.costoarbol %>
+                      </h6>
+                    </td>
+                    <% } %>
+              </tr>
+
+
+              <% }) %>
+      </div>
+      </tbody>
+
+
+      </table>
+    </div>
+    </div>
+  </div>
+
+<footer>
+ 
+  </footer>
