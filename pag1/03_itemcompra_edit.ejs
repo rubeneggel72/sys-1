@@ -1,0 +1,2057 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="/../img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../img/favicon.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <title>
+    SYS EC-EDIT PRODUCTO
+  </title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <!-- Nucleo Icons -->
+  <link href="../css/nucleo-icons.css" rel="stylesheet" />
+  <link href="../css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <link href="../css/nucleo-svg.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link id="pagestyle" href="/../css/soft-ui-dashboard.css?v=1.0.7" rel="stylesheet" />
+  <!-- Nepcha Analytics (nepcha.com) -->
+  <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
+  <!-- nepcha script  -->
+  <script src="../js/core/popper.min.js"></script>
+  <script src="../js/core/bootstrap.min.js"></script>
+  <script src="../js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="../js/plugins/chartjs.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+    integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+    crossorigin="anonymous"></script>
+</head>
+
+<body class="g-sidenav-show  bg-gray-100">
+  <%- include ('../partials/_sideNavBar.ejs') %>
+
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+      <!-- Navbar -->
+      <%- include ('../partials/_navBar.ejs') %>
+        <!-- End Navbar -->
+        <h4>
+          <%= locals.title %>
+        </h4>
+        
+        <form action="../../ordentrabajo/add/<%= itemcompra._id %>?_method=get" method="GET">
+          <div class="col-lg-12 col-md-12 mb-md-0 mb-4">
+            <% if((itemcompra.tipoitem=="Producto")||(itemcompra.tipoitem=="Venta")){ %>   
+          <button type="submit" class="btn btn-primary">Generar orden de trabajo</button>
+<% } %> 
+        </form>
+        
+        <form action="<%= itemcompra._id %>?_method=PUT" method="POST">
+          <div class="row my-4">
+            <div class="col-lg-12 col-md-12 mb-md-0 mb-4">
+              <button type="submit" class="btn btn-primary">Guardar</button>
+              <a href="/itemcompra/index" class="btn btn-info" role="button">Volver</a>
+              <button  type="button" class="btn btn-danger" data-bs-toggle="modal" id="deleteButton"
+                data-bs-target="#deleteModal">Eliminar</button>
+              <div class="card">
+                <div class="card-header pb-0">
+                  <div class="row">
+                    <div class="col-lg-4 col-7">
+
+
+
+
+                      <h6>
+                        Datos principales
+                      </h6>
+                    </div>
+                  </div>
+                  <div
+                    class="d-flex justify-content-between flex-wrap flex-md nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                  </div>
+
+                  <div class="col py-3">
+                    <input hidden id="_id" value="<%= itemcompra._id%>" type="text">
+                  </div>
+                </div>
+                <div class="row form-group mb-4">
+                  <div class="col-12">
+                    <h5>Conversion Un.</h5>
+                    <div class="table-responsive ">
+
+                      <table class="table table-striped table-success ">
+                        <thead>
+
+                          <tr>
+                            <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-2 col-1">
+                              ID /cant
+                            </th>
+                            <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-2 col-1">
+                              Tipo
+                            </th>
+                            <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-2 col-2">
+                              Rubro
+                            </th>
+                            <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-2 col-4">
+                              Codigo
+                            </th>
+                            <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-2 col-3">
+                              Descripción
+                            </th>
+                            <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-2 col-">
+                              Stock
+                              mínimo
+                            </th>
+                            <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-2 col-1">
+                              Unidad
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                              <input hidden type="text" name="iditemcompra" value="<%= itemcompra.iditemcompra %>">
+                              <div class="text-uppercase text-danger text-xs font-weight-bolder opacity-100 ps-2 "><%= itemcompra.iditemcompra %>-<%= itemcompra.hijo %>/ Cant:   <%= itemcompra.stock1 %></div>
+                              </td>
+                            <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-2">
+                              <select id="seltipo" class="col-12" aria-label="Default select example"
+                                onchange="oprubro();">
+                                <option value="<%= itemcompra.tipoitem %>">
+                                  <%= itemcompra.tipoitem%>
+                                </option>
+                                <%tipoitem.forEach(element=> { %>
+                                  <option value="<%= element.rubroitem  %>">
+                                    <%= element.nombre %>
+                                  </option>
+                                  <% }) %>
+                              </select>
+                              <input hidden name="tipoitem" type="text" class="col-12" id="tipoitem" name="nombre"
+                                value="<%= itemcompra.tipoitem%>" placeholder="">
+
+                            </td>
+                            <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-2">
+                              <select id="oprubros" name="rubroitem" class="col-12" aria-label="Default select example">
+                                <option value="<%= itemcompra.rubroitem%>">
+                                  <%= itemcompra.rubroitem %>
+                                </option>
+                              </select>
+                            </td>
+
+                            <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                              <input type="text" class="col-12" id="nombre" name="nombre"
+                                value="<%= itemcompra.nombre %>" placeholder="">
+                            </td>
+                            <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                              <input type="text" class="col-12" id="observacion" name="observacion"
+                                value="<%= itemcompra.observacion %>" placeholder="">
+                            </td>
+                            <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1"> <input
+                                type="number" class="" id="stockminimo" name="stockminimo"
+                                value="<%= itemcompra.stockminimo %>" placeholder=""> </td>
+                            <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                              <select id="unidadSelect" class="" name="unidad" aria-label="Default select example">
+                                <option value="<%= itemcompra.unidad %>">
+                                  <%= itemcompra.unidad %>
+                                </option>
+                                <option value="un">Un</option>
+                                <option value="m">m</option>
+                                <option value="m2">m2</option>
+                                <option value="m3">m3</option>
+                                <option value="lt">Lt</option>
+                                <option value="kg">Kg</option>
+                                <option value="H">H</option>
+                              </select>
+                            </td>
+                          </tr>
+                        <tr>
+                           <td> Trazabilidad por unidad: </td>  
+                           <td> 
+                            <select id="trazabilidad" class="" name="trazabilidad" aria-label="Default select example">
+                              <option value="<%= itemcompra.trazabilidad %>">
+                                <%= itemcompra.trazabilidad %>
+                              </option>
+                             
+                              <option value="Lote">Lote</option>
+                              <option value="Unidad">Unidad</option>
+                          
+                            </select>
+                          
+                          </td>  
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+
+                <div class="row form-group mb-4">
+                  <div class="col-3">
+                    <h5>Conversion de unidades</h5>
+                    <div class="table-responsive ">
+                      <table class="table table-striped table-success ">
+                        <thead>
+                          <tr>
+                            <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-2 ">Unidad
+                            </th>
+                            <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-2 ">valor
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1"> m x un.</td>
+                            <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1"> <input class=""
+                                name="mxunidad" value="<%= itemcompra.mxunidad%>" placeholder="" type="number"
+                                step="0.001" min="0"></td>
+                          </tr>
+                          <tr>
+                            <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1"> m2 x un.</td>
+                            <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1"> <input
+                                type="number" class="" name="m2xunidad" value="<%= itemcompra.m2xunidad %>"
+                                placeholder="" step="0.001" min="0"></td>
+                          </tr>
+                          <tr>
+                            <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1"> m3 x un.</td>
+                            <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1"> <input
+                                type="number" class="" name="m3xunidad" value="<%= itemcompra.m3xunidad %>"
+                                placeholder="" step="0.001" min="0"></td>
+                          </tr>
+                          <tr>
+                            <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">kg x un.</td>
+                            <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1"> <input
+                                type="number" class="" name="kgxunidad" value="<%= itemcompra.kgxunidad %>"
+                                placeholder="" step="0.001" min="0"></td>
+                          </tr>
+                          <tr>
+                            <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">lt x un.</td>
+                            <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1"> <input
+                                type="number" class="" name="lxunidad" value="<%= itemcompra.lxunidad %>" placeholder=""
+                                step="0.001" min="0"></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <label for="details">Observaciones</label>
+                    <textarea class="form-control" name="details" id="details" cols="25" rows="10"
+                      placeholder="Observaciones"><%= itemcompra.details %></textarea>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+
+              <div class="row my-4">
+                <div class="col-lg-12 col-md-12 mb-md-0 mb-4">
+                  <div class="card">
+                    <div class="card-header pb-0">
+                      <div class="row">
+                        <div class="col-lg-1 col-1">
+                          <div id="configuracionesvisible" hidden>
+                            <a type="button">
+                              <i class="bi bi-arrow-up-square-fill " onclick="configuracionesinvisible()"> </i>
+                            </a>
+                          </div>
+
+                          <div id="configuracionesinvisible">
+                            <a type="button">
+                              <i class="bi bi-arrow-down-square-fill" onclick="configuracionesvisible()"> </i>
+                            </a>
+                          </div>
+                        </div>
+                        <div class="col-lg-4 col-7">
+                          <h6>
+                            Configuraciones del producto
+                          </h6>
+                        </div>
+
+                      </div>
+                      <div
+                        class="d-flex justify-content-between flex-wrap flex-md nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                      </div>
+                      <div id="configuracionesvisible1" hidden>
+                        <div class="row">
+                          <div class="col-2">
+                            <label for="">Nombre nueva configuración</label>
+                            <input size="30" type="text" id="nuevaconfiguracion">
+                            <input hidden size="30" type="text" id="string01" name="string01"
+                              value="<%= itemcompra.string01 %>">
+                          </div>
+                          <div class="col-1">
+                          </div>
+                          <div class="col-2">
+                            <a class="btn btn-info" onclick="agregarconfiguracion()">AGREGAR NUEVA CONFIGARACION</a>
+                          </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                        <div class="table-responsive ">
+                          <table class="table table-striped table-success ">
+                            <thead>
+                              <tr>
+                                <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-2 ">
+                                  Nº
+                                </th>
+                                <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-2 ">
+                                  Nombre
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody id="configuraciones">
+
+
+                              
+
+
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+
+
+
+
+
+
+         
+    
+
+                                 
+
+              <div class="row my-4">
+                <div class="col-lg-12 col-md-12 mb-md-0 mb-4">
+                  <div class="card">
+                    <div class="card-header pb-0">
+                      <div class="row">
+                        <div class="col-lg-1 col-1">
+                          <div id="stockvisible" hidden>
+                            <a type="button">
+                              <i class="bi bi-arrow-up-square-fill " onclick=" sockinvisible()"> </i>
+                            </a>
+                          </div>
+
+                          <div id="stockinvisible">
+                            <a type="button">
+                              <i class="bi bi-arrow-down-square-fill" onclick=" sockvisible()"> </i>
+                            </a>
+                          </div>
+                        </div>
+                        <div class="col-lg-4 col-7">
+                          <h6>
+                            Resumen Stock
+                          </h6>
+                        </div>
+
+                      </div>
+                      <div
+                        class="d-flex justify-content-between flex-wrap flex-md nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                      </div>
+                      <div id="stockvisible1" hidden>
+                        <div class="table-responsive ">
+                          <table class="table table-striped table-success ">
+                            <thead>
+                              <tr>
+                                <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-2 ">
+                                  Lugar
+                                </th>
+                                <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-2 ">
+                                  Posición
+                                </th>
+                                <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-2 ">
+                                  Cant
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">Reservado OV
+                                  
+                                </td>
+                                <td></td>
+                                <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                                  <input type="text" class="" id="" name="stockreservado"
+                                    value="<%= itemcompra.stockreservado%>" placeholder="">
+                                    <% itemcompra.reservado.forEach(item => { %>
+                                      <li><%= item %></li>
+                                  <% });%>
+                                   
+
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1"> Proceso
+                                  compra
+                                </td>
+                                <td></td>
+                                <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                                  <input type="text" class="" id="" name="stockcompras"
+                                    value="<%= itemcompra.stockcompras%>" placeholder="">
+                                    <% itemcompra.comprado.forEach(item => { %>
+                                      <li><%= item %></li>
+                                  <% });%>
+                                </td>
+                              </tr>
+                              <tr hidden>
+                                <td hidden class=" text-secondary text-xs font-weight-bolder text-black-100 col-1"> Recepción
+                                  (Pos 1)
+                                </td>
+                                <td hidden class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                                  <input hidden type="text" class="" id="stockrecepcionpos1" name="stockrecepcionpos1"
+                                    value="<%= itemcompra.stockrecepcionpos1 %>" placeholder="">
+                                </td>
+                                <td hidden class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                                  <input type="text" class="" id="" name="stockrecepcion1"
+                                    value="<%= itemcompra.stockrecepcion1%>" placeholder="">
+                                </td>
+                              </tr>
+                              <tr hidden>
+                                <td hidden class=" text-secondary text-xs font-weight-bolder text-black-100 col-1"> Recepción
+                                  (Pos 2)
+                                </td>
+                                <td hidden class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                                  <input type="text" class="" id="stockrecepcionpos2" name="stockrecepcionpos2"
+                                    value="<%= itemcompra.stockrecepcionpos2 %>" placeholder="">
+                                </td>
+                                <td hidden class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                                  <input type="text" class="" id="" name="stockrecepcion2"
+                                    value="<%= itemcompra.stockrecepcion2%>" placeholder="">
+                                </td>
+
+                              </tr>
+                              <tr hidden>
+                                <td hidden class=" text-secondary text-xs font-weight-bolder text-black-100 col-1"> Devolución
+
+                                </td>
+                                <td hidden class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                                  <input type="text" class="" id="stockdevolucionpos" name="stockdevolucionpos"
+                                    value="<%= itemcompra.stockdevolucionpos %>" placeholder="">
+                                </td>
+                                <td hidden class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                                  <input type="text" class="" id="" name="stockdevolucion"
+                                    value="<%= itemcompra.stockdevolucion%>" placeholder="">
+                                </td>
+                              </tr>
+                              <tr hidden>
+                                <td hidden class=" text-secondary text-xs font-weight-bolder text-black-100 col-1"> Devuelto
+
+                                </td>
+                                <td></td>
+                                <td hidden class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                                  <input type="text" class="" id="" name="stockdevuelto"
+                                    value="<%= itemcompra.stockdevuelto%>" placeholder="">
+                                </td>
+                              </tr>
+                              <tr hidden>
+                                <td hidden class=" text-secondary text-xs font-weight-bolder text-black-100 col-1"> Incorp. a
+                                  Item
+                                </td>
+                                <td></td>
+                                <td hidden class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                                  <input type="text" class="" id="" name="stockincorporado"
+                                    value="<%= itemcompra.stockincorporado %>" placeholder="">
+                                </td>
+                              </tr>
+
+                              <tr>
+                                <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1"> En
+                                  fabricacion
+                                </td>
+                                <td></td>
+                                <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                                  <input type="text" class="" id="" name="stockproduccion"
+                                    value="<%= itemcompra.stockproduccion %>" placeholder="">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                                  Acondicionamiento
+                                </td>
+                                <td></td>
+                                <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                                  <input type="text" class="" id="" name="stockacondicionamiento"
+                                    value="<%= itemcompra.stockacondicionamiento %>" placeholder="">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1"> Almacen P.Comprado
+                                </td>
+                                <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                                  <input type="text" class="" id="stockpos1" name="stockpos1"
+                                    value="<%= itemcompra.stockpos1 %>" placeholder="">
+                                   
+                                </td>
+
+                                <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                                  <input type="number" class="" id="stock1" name="stock1"
+                                    value="<%= itemcompra.stock1 %>" placeholder="">
+                                  <% itemcompra.recibidocompr.forEach(item => { %>
+                                      <li><%= item %></li>
+                                  <% });%>
+
+
+
+                                </td>
+                              </tr>
+                              <tr>
+                                <td hidden class=" text-secondary text-xs font-weight-bolder text-black-100 col-1"> Posición 2
+                                </td>
+                                <td hidden class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                                  <input type="text" class="" id="stockpos2" name="stockpos2"
+                                    value="<%= itemcompra.stockpos2 %>" placeholder="">
+                                </td>
+                                <td hidden class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                                  <input type="number" class="" id="stock2" name="stock2"
+                                    value="<%= itemcompra.stock2 %>" placeholder="">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td hidden class=" text-secondary text-xs font-weight-bolder text-black-100 col-1"> Posición 3
+                                </td>
+                                <td hidden class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                                  <input type="text" class="" id="stockpos3" name="stockpos3"
+                                    value="<%= itemcompra.stockpos3 %>" placeholder="">
+                                </td>
+                                <td hidden class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                                  <input type="number" class="" id="stock3" name="stock3"
+                                    value="<%= itemcompra.stock3 %>" placeholder="">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td hidden class=" text-secondary text-xs font-weight-bolder text-black-100 col-1"> Posición 4
+                                </td>
+                                <td hidden class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                                  <input type="text" class="" id="stockpos4" name="stockpos4"
+                                    value="<%= itemcompra.stockpos4 %>" placeholder="">
+                                </td>
+                                <td hidden class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                                  <input type="number" class="" id="stock4" name="stock4"
+                                    value="<%= itemcompra.stock4 %>" placeholder="">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td hidden class=" text-secondary text-xs font-weight-bolder text-black-100 col-1"> Despacho
+
+                                </td>
+
+                                <td hidden class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                                  <input type="text" class="" id="stockpos4" name="stockdespachopos"
+                                    value="<%= itemcompra.stockdespachopos %>" placeholder="">
+                                </td>
+
+                                <td hidden class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                                  <input type="text" class="" id="" name="stockdespacho"
+                                    value="<%= itemcompra.stockdespacho%>" placeholder="">
+                                </td>
+                              </tr>
+
+                              <tr>
+                                <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1"> Entregados a Clientes o Usado en Productos
+                                </td>
+                                <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                                </td>
+                                <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                                  <input type="number" class="" id="" name="stockentregado"
+                                    value="<%= itemcompra.stockentregado %>" placeholder="">
+                                    <% itemcompra.entregadocliente.forEach(item => { %>
+                                      <li><%= item %></li>
+                                  <% });%>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row my-4">
+                <div class="col-lg-12 col-md-12 mb-md-0 mb-4">
+                  <div class="card">
+                    <div class="card-header pb-0">
+                      <div class="row">
+                        <div class="col-lg-1 col-1">
+                          <div id="textosvisible" hidden>
+                            <a type="button">
+
+                              <i class="bi bi-arrow-up-square-fill " onclick=" textosinvisible()"> </i>
+                            </a>
+                          </div>
+
+                          <div id="textosinvisible">
+                            <a type="button">
+                              <i class="bi bi-arrow-down-square-fill" onclick=" textosvisible()"> </i>
+                            </a>
+                          </div>
+                        </div>
+                        <div class="col-lg-4 col-7">
+                          <h6>
+                            Textos para Oden de compra/Cotizaciones/Tienda
+                          </h6>
+                        </div>
+                      </div>
+                      <div id="textosvisible1" hidden>
+                        <div
+                          class="d-flex justify-content-between flex-wrap flex-md nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        </div>
+
+                        <div class="row form-group mb-4">
+                          <div class="col-6">
+                            <label for="details">Título para orden de compra</label>
+                            <input class="form-control" name="ordencompratitulo" id="ordencompratitulo"
+                              value="<%= itemcompra.ordencompratitulo %>" placeholder="">
+
+                            <label for="details">Descripcion para orden de compra</label>
+                            <textarea class="form-control" name="ordencompradetails" id="ordencompradetails" cols="15"
+                              rows="5" placeholder="Observaciones"><%= itemcompra.ordencompradetails %></textarea>
+                          </div>
+                          <div class="col-6">
+                            <label for="details">Título para cotización</label>
+                            <input class="form-control" name="cotizaciontitulo" id="cotizaciontitulo"
+                              placeholder="Observaciones" value=" <%= itemcompra.cotizaciontitulo %>">
+
+                            <label for="details">Descripcion para cotización</label>
+                            <textarea class="form-control" name="cotizaciondetails" id="cotizaciondetails" cols="15"
+                              rows="5" placeholder="Observaciones"><%= itemcompra.cotizaciondetails %></textarea>
+                            <h5>Características</h5>
+
+                            <label for="details">Diámetro</label>
+                            <input type="text" class="col-12" id="vdiametro" name="vdiametro"
+                              value="<%= itemcompra.vdiametro %>" placeholder="">
+                            <label for="details">Sección</label>
+                            <input type="text" class="col-12" id="vseccion" name="vseccion"
+                              value="<%= itemcompra.vseccion %>" placeholder="">
+                            <label for="details">Longitud</label>
+                            <input type="text" class="col-12" id="vlongitud" name="vlongitud"
+                              value="<%= itemcompra.vlongitud %>" placeholder="">
+                            <label for="details">Ancho</label>
+                            <input type="text" class="col-12" id="vancho" name="vancho" value="<%= itemcompra.vancho%>"
+                              placeholder="">
+                            <label for="details">Altura</label>
+                            <input type="text" class="col-12" id="valtura" name="valtura"
+                              value="<%= itemcompra.valtura %>" placeholder="">
+                            <label for="details">Dimensiones</label>
+                            <input type="text" class="col-12" id="vdimension" name="vdimension"
+                              value="<%= itemcompra.vdimension %>" placeholder="">
+                            <label for="details">Inclinación</label>
+                            <input type="text" class="col-12" id="vinclinacion" name="vinclinacion"
+                              value="<%= itemcompra.vinclinacion %>" placeholder="">
+                            <label for="details">Pendiente</label>
+                            <input type="text" class="col-12" id="vpendiente" name="vpendiente"
+                              value="<%= itemcompra.vpendiente %>" placeholder="">
+                            <label for="details">Accionamiento</label>
+                            <input type="text" class="col-12" id="vaccionamiento" name="vaccionamiento"
+                              value="<%= itemcompra.vaccionamiento %>" placeholder="">
+                            <label for="details">Mando</label>
+                            <input type="text" class="col-12" id="vmando" name="vmando" value="<%= itemcompra.vmando %>"
+                              placeholder="">
+                            <label for="details">Motor</label>
+                            <input type="text" class="col-12" id="vmotor" name="vmotor" value="<%= itemcompra.vmotor %>"
+                              placeholder="">
+                            <label for="details">Capacidad producción</label>
+                            <input type="text" class="col-12" id="vcapacidadproduccion" name="vcapacidadproduccion"
+                              value="<%= itemcompra.vcapacidadproduccion%>" placeholder="">
+                            <label for="details">Capacidad útil</label>
+                            <input type="text" class="col-12" id="vcapacidadutil" name="vcapacidadutil"
+                              value="<%= itemcompra.vcapacidadutil%>" placeholder="">
+                            <label for="details">Capacidad total</label>
+                            <input type="text" class="col-12" id="vcapacidadtotal" name="vcapacidadtotal"
+                              value="<%= itemcompra.vcapacidadtotal%>" placeholder="">
+                            <label for="details">Entrada</label>
+                            <input type="text" class="col-12" id="ventrada" name="ventrada"
+                              value="<%= itemcompra.ventrada%>" placeholder="">
+                            <label for="details">Salida</label>
+                            <input type="text" class="col-12" id="vsalida" name="vsalida"
+                              value="<%= itemcompra.vsalida%>" placeholder="">
+                            <label for="details">Tensión</label>
+                            <input type="text" class="col-12" id="vtension" name="vtension"
+                              value="<%= itemcompra.vtension%>" placeholder="">
+                            <label for="details">Potencia</label>
+                            <input type="text" class="col-12" id="vpotencia" name="vpotencia"
+                              value="<%= itemcompra.vpotencia%>" placeholder="">
+                            <label for="details">Material</label>
+                            <input type="text" class="col-12" id="vmaterial" name="vmaterial"
+                              value="<%= itemcompra.vmaterial %>" placeholder="">
+                            <label for="details">Terminación</label>
+                            <input type="text" class="col-12" id="vterminacion" name="vterminacion"
+                              value="<%= itemcompra.vterminacion %>" placeholder="">
+                            <label for="details">Tratamiento</label>
+                            <input type="text" class="col-12" id="vtratamiento" name="vtratamiento"
+                              value="<%= itemcompra.vtratamiento %>" placeholder="">
+                            <label for="details">Peso</label>
+                            <input type="text" class="col-12" id="vpeso" name="vpeso" value="<%= itemcompra.vpeso %>"
+                              placeholder="">
+                            <label for="details">Nota para cotización</label>
+                            <textarea class="form-control" name="cotizacionnota" id="cotizacionnota" cols="15" rows="5"
+                              placeholder="Nota"><%= itemcompra.cotizacionnota %></textarea>
+
+                          </div>
+                        </div>
+
+
+                        <div
+                          class="d-flex justify-content-between flex-wrap flex-md nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        </div>
+                        <div class="row form-group mb-4">
+                          <div class="col-6">
+                            <label for="details">Título (Tienda)</label>
+                            <input class="form-control" name="tiendatitulo" id="tiendatitulo" placeholder=""
+                              value="<%= itemcompra.tiendatitulo %>">
+                            <label for="details">Descripcion (Tienda)</label>
+                            <textarea class="form-control" name="tiendadetalle" id="tiendadetalle" cols="15" rows="5"
+                              placeholder="Observaciones"><%= itemcompra.tiendamaterial %></textarea>
+                            <label for="details">Material (Tienda)</label>
+                            <input class="form-control" name="tiendamaterial" id="tiendamaterial" placeholder=""
+                              value="<%= itemcompra.tiendamaterial %>">
+                            <label for="details">Cantidad (Tienda)</label>
+                            <input class="form-control" name="tiendacantidad" id="tiendacantidad" placeholder=""
+                              value="<%= itemcompra.tiendacantidad %>">
+                            <label for="details">Plazo entrega (Tienda)</label>
+                            <input class="form-control" name="tiendaplazo" id="tiendaplazo" placeholder=""
+                              value="<%= itemcompra.tiendaplazo %>">
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <input hidden type="text" class="" id="itemagregadocant" name="itemagregadocant" value="0"
+                    placeholder="">
+                  <input hidden type="text" class="" id="itemagregadojunto" name="itemagregadojunto" value="0"
+                    placeholder="">
+                  <input hidden type="text" class="" id="indicatoragregadocant" name="indicatoragregadocant" value="0"
+                    placeholder="">
+                    <input  hidden type="text" class="" id="activoitemsagregados" name="activoitemsagregados" value="false"
+                    placeholder="">
+
+                    
+                  <div class="row my-4">
+                    <div class="col-lg-12 col-md-12 mb-md-0 mb-4">
+                      <div class="card">
+                        <div class="card-header pb-0">
+                          <div class="row">
+                            <div class="col-lg-4 col-7">
+                              <h6>
+                                Componentes del conjunto
+                              </h6>
+                            </div>
+                          </div>
+                          <div
+                            class="d-flex justify-content-between flex-wrap flex-md nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                          </div>
+                          <input hidden type="text" name="archivos-cant" id="archivos-cant" disabled>
+                          <input hidden type="text" name="archivos" id="archivos-0" disabled>
+                          <input hidden type="text" name="archivos-compras" id="archivos-1" disabled>
+                          <input hidden type="text" name="archivos-ingenieria" id="archivos-2" disabled>
+                          <input hidden type="text" name="archivos-torneria" id="archivos-3" disabled>
+                          <input hidden type="text" name="archivos-armado" id="archivos-4" disabled>
+                          <input hidden type="text" name="archivos-pañol" id="archivos-5" disabled>
+                          <input hidden type="text" name="archivos-corteyplegado" id="archivos-6" disabled>
+                          <input hidden type="text" name="archivos-administracion" id="archivos-7" disabled>
+                          <input hidden type="text" name="archivos-ventas" id="archivos-8" disabled>
+                          <input hidden type="text" name="archivos-gerencia" id="archivos-9" disabled>
+                          <input hidden type="text" name="archivos-calidad" id="archivos-10" disabled>
+                          <input hidden type="text" name="archivos-electricidad" id="archivos-11" disabled>
+                          <input hidden type="text" name="archivos-electricidad" id="archivos-12" disabled>
+                          <input hidden type="text" name="archivos-electricidad" id="archivos-13" disabled>
+                          <input hidden type="text" name="archivos-electricidad" id="archivos-14" disabled>
+                          <input hidden type="text" name="archivos-electricidad" id="archivos-15" disabled>
+                          <input hidden type="text" name="files_upload" id="files_upload"
+                            value="<%= itemcompra.files_upload%>">
+        </form>
+        </div>
+        <form action="../searchitemagregado" id="myForm" method="post">
+          <div class="input-group">
+            <!-- <span class="input-group-text text-body"><i class="fa fa-plus" aria-hidden="true"
+                    onclick="document.getElementById('myForm').submit();"></i></span> -->
+            <input type="text" class="form-control" name="searchTerm" value="" placeholder="" hidden>
+            <input type="text" class="form-control" name="itemcompra" value="<%=itemcompra._id %>" placeholder=""
+              hidden>
+          </div>
+          <button id="btnactualizaritem" class="btn btn-info" onclick="document.getElementById('myForm').submit();">+
+            Adjuntar Item</button>
+        </form>
+        <div class="row form-group mb-4">
+          <div class="table-responsive ">
+            <table class="table table-striped table-success ">
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 col-1 ">Nº / Activo
+                  </th>
+                  <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 col-1">Cant
+                  </th>
+                  <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 col-1">Suelto
+                  </th>
+                  <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 col-1">ID</th>
+                  <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 col-3">Nombre</th>
+                  <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 col-1">Tipo
+                  </th>
+                  <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 col-1">Rubro
+                  </th>
+                  <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 col-md-1">Costo
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <% var i=0; itemcompra.itemagregado.forEach(element=> { %>
+                  <tr>
+                    <td class=" text-secondary text-xs font-weight-bolder text-black-100  "> 
+                      <div class="row">
+                        <div class="col-7">
+                          <input class="" size="5"
+                          id="ao<%=i%>" value="<%= i+1 %>" step="1" min="0" max="<%= itemcompra.itemagregado.length %>"
+                          onchange="ordenaritem()" />
+                        </div>
+                        <div class="col-1 offset-1">
+                        <input type="checkbox" id="ac_<%= i %>" onchange="actualizaritem()">
+                        </div>
+                      </div>
+                      
+                
+                        
+                      
+                    </td>
+                    <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1"> <input class=""
+                        size="5" id="aa<%=i%>" value="<%= element.cant %>" onchange="actualizaritem()" />
+                      <%= element.unidad %>
+                    </td>
+                    <td class=" text-secondary text-xs font-weight-bolder text-black-100">
+                      <select id="ag<%=i%>" class="" aria-label="Default select example" onchange="actualizaritem()">
+                        <option value=" <%= element.junto %> ">
+                          <%= element.junto %>
+                        </option>
+                        <option value="Suelto">Suelto</option>
+                        <option value="Agrupado">Agrupado</option>
+                      </select>
+                    </td>
+                    <td class=" text-secondary text-xs font-weight-bolder text-black-100">
+                    
+                   
+                      <a  class="text-success"  href="/itemcompra/edit/<%= element._id %>"><%= element.iditemcompra %>-<%= element.hijo %></a>
+                          
+                      <% if(element.cant=='0'){ %><del> <% } %> <%= element.nombre %> <% if(element.cant=='0'){ %></del> <% }%>
+                              
+
+                    </td>
+                    <td class=" text-secondary text-xs font-weight-bolder text-black-100">
+                      <%= element.nombre %>-<%= element.observacion%>
+                    </td>
+                    <td class=" text-secondary text-xs font-weight-bolder text-black-100">
+                      <%= element.tipoitem %>
+                    </td>
+                    <td class=" text-secondary text-xs font-weight-bolder text-black-100">
+                      <%= element.rubroitem %>
+                    </td>
+                    <td class=" text-secondary text-xs font-weight-bolder text-black-100" id="dd<%=i%>">
+                      <%= element.costoarbol %>-<%= element.numero01 %>
+                    </td>
+                    <td class="text-end text-secondary text-xs font-weight-bolder text-black-100 ">
+                      <div class="justify-content-end ">
+                        <div class="espacio"></div>
+                        <a href="../viewItemagregado/<%=element._id %>,<%=itemcompra._id %>"
+                          type="btn btn-info boton-color"></a>
+                        <% if(element.itemagregado.length-1>0){ %>    
+                          <i class="bi bi-paperclip">
+                          </i>
+                          </a>
+                          <%= element.itemagregado.length-1 %> -
+                            <% } %>
+                              <i class="bi bi-eye "></i>
+                              </a>
+                              <a hidden href="../deleteitemagregado/<%=element._id %>,<%=itemcompra._id %>"
+                                type="btn btn-info boton-color">
+                                <i class="bi bi-trash"></i>
+                              </a>
+                      </div>
+                    </td>
+                  </tr>
+                  <% i++; }) %>
+                   
+                    <% %>
+
+              </tbody>
+            </table>
+            <input  id="itemtotal" value="<%=i %>" hidden>
+            <input hidden type="number" step="0.001" min="0" id="costoitemsagregados" value="0" >
+            <input hidden type="number" step="0.001" min="0" id="costopropio" name="costopropio" value="0" >
+            Costo total:
+            <input hidden type="number" step="0.001" min="0" id="costoarbol" name="costoarbol" value="0" >
+           Precio sugerido:
+            <input hidden type="number" step="0.001" min="0" id="precioventa" name="precioventa" value="0">
+          </div>
+        </div>
+        </div>
+        </div>
+
+      
+
+
+
+
+        <div class="row my-4">
+          <div class="col-lg-12 col-md-12 mb-md-0 mb-4">
+            <div class="card">
+              <div class="card-header pb-0">
+                <h6>
+                  Documentos y su distribución
+                </h6>
+                <div
+                  class="d-flex justify-content-between flex-wrap flex-md nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                </div>
+              </div>
+              <div class="row form-group mb-4">
+                <div class="table-responsive ">
+                  <table class="table table-striped table-success ">
+                    <thead>
+                      <tr>
+                        <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-2">
+                          Nombre
+                          (Link)</th>
+                        <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-3">
+                          Descripcion </th>
+                        <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-1">
+                          Orden
+                          Compra</th>
+                        <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-1">
+                          Compras
+                        </th>
+                        <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-1">
+                          Depósito
+                        </th>
+                        <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-1">
+                          Torneria
+                        </th>
+                        <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-1">
+                          Armado
+                        </th>
+                        <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-1">C
+                          y Pleg.
+                        </th>
+                        <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-1">
+                          Pintura
+                        </th>
+                        <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-1">
+                          Calidad
+                        </th>
+                        <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-1">
+                          Electricidad</th>
+                        <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-1">
+                          Terminación</th>
+                        <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-1">
+                          Despacho
+                        </th>
+                        <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-1">
+                          Admin</th>
+                        <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-1">
+                          Tienda</th>
+                        <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-1">
+                          Cliente
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody id="archivoslista"> </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="row form-group mb-4">
+                <div class="text-secondary text-xs font-weight-bolder text-black-100 col-4">
+                  <input type="text" name="archivos" id="archivos" hidden>
+                  <label for="filesfld" id="fileslbl" class="btn btn-success"
+                    ondragover="stopDefault(event);dragOver(this, '------------- Suelte archivos aqui -----------------');"
+                    ondragenter="stopDefault(event);dragOver(this, 'Suelte archivos aqui o presione para seleccionar');"
+                    ondragleave="stopDefault(event);dragLeave(this);"
+                    ondrop="stopDefault(event);dragLeave(this);addFilesAndSubmit(event);">Arrastre o presione para
+                    seleccionar
+                  </label>
+                  <form id="filesfrm" action="/upload" method="post" onsubmit="return submitFilesForm(this);">
+                    <input type="file" name="filesfld" id="filesfld" accept="*" onchange="submitFilesForm(this.form);"
+                      multiple hidden />
+                    <div class="text-secondary text-xs font-weight-bolder text-black-100 col-6">
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div style="text-align: left;">
+                <div id="progress"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <% if((user.role=="GER" )||(user.role=="SIS" )||(user.role=="ING" )){ %>
+          <div class="row my-4">
+            <% } else{ %>
+              <div class="row my-4" hidden>
+                <% } %>
+
+                  <div class="col-lg-12 col-md-12 mb-md-0 mb-4">
+                    <div class="card">
+                      <div class="card-header pb-0">
+                        <div class="row">
+                          <div class="col-lg-4 col-7">
+                            <h6>
+                              Costos
+                            </h6>
+                          </div>
+                        </div>
+                        <div
+                          class="d-flex justify-content-between flex-wrap flex-md nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        </div>
+                        <div class="row">
+                          <div class=" col-2">
+                            <h6>
+                              Costos propio:
+                            </h6>
+                          </div>
+                          <div class=" col-2">
+                            <h6>
+                              valor
+                            </h6>
+                          </div>
+                        </div>
+
+
+
+                      </div>
+
+                      <form action="../searchindicator" id="myForm" method="post">
+
+                        <div class="input-group">
+                          <!-- <span class="input-group-text text-body"><i class="fa fa-plus" aria-hidden="true"
+                        onclick="document.getElementById('myForm').submit();"></i></span> -->
+                          <input type="text" class="form-control" name="searchTermCosto" value="" placeholder="" hidden>
+                          <input type="text" class="form-control" name="itemcompra" value="<%=itemcompra._id %>"
+                            placeholder="" hidden>
+                        </div>
+                        <button id="btnactualizaritem" class="btn btn-info"
+                          onclick="document.getElementById('myForm').submit();">+ Adjuntar Indicador Costo</button>
+                        <input type="text" class="form-control" name="searchTerm" value="" placeholder="" hidden>
+                      </form>
+
+                      <div class="row form-group mb-4">
+                        <div class="row form-group mb-4">
+                          <div class="table-responsive ">
+                            <table class="table table-striped table-success ">
+                              <thead>
+                                <tr>
+                                  <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-2">
+                                    Cant
+                                  </th>
+                                  <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100">Valor
+                                    U$S</th>
+                                  <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100">Nombre
+                                  </th>
+                                  <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-2">
+                                    Tipo
+                                  </th>
+                                  <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-2">
+                                    ID
+                                  </th>
+                                  <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-100 ps-2">
+                                    Observ.
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <% var i=0; var costo=0; itemcompra.indicatoragregado.forEach(element=> { %>
+                                  <tr>
+                                    <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1"> <input
+                                        class="" type="number" step="0.001" min="0" id="bb<%=i%>"
+                                        value="<%= element.cant %>" onchange="actualizarindicator()" />
+                                    </td>
+                                    <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1"
+                                      id="cc<%=i%>">
+                                      <%= element.valor %>
+                                    </td>
+                                    <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-3">
+                                      <%= element.name %>
+                                    </td>
+                                    <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-2"
+                                      id="ee<%=i%>">
+                                      <%= element.tipo %>
+                                    </td>
+
+                                    <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                                      <%= element.idindicator %>
+                                    </td>
+                                    <td class=" text-secondary text-xs font-weight-bolder text-black-100 col-3">
+                                      <%= element.details %>
+                                    </td>
+                                    <td class="text-end text-secondary text-xs font-weight-bolder text-black-100 col-1">
+                                      <div class="justify-content-end ">
+                                        <div class="espacio"></div>
+                                        <a href="../deleteindicator/<%=element._id %>,<%=itemcompra._id %>"
+                                          type="btn btn-info boton-color">
+                                          <i class="bi bi-trash"></i>
+                                        </a>
+                                      </div>
+                                    </td>
+                                  </tr>
+
+                                  <% i++; }) %>
+                                    <input id="indicatortotal" value="<%=i %>" hidden>
+
+
+                                    <% %>
+                              </tbody>
+                            </table>
+                            <label hidden for="">Costo</label>
+                            <input hidden type="number" step="0.001" min="0" id="costoarbol1" name="costoarbol" value="0"
+                              disabled>
+                            .
+                            <label hidden for=""> Precio Venta</label>
+                            <input hidden type="number" step="0.001" min="0" id="precioventa1" name="precioventa" value="0"
+                              disabled>
+
+                            <input hidden type="number" step="0.001" min="0" id="numero01" name="numero01" value="0">
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+                    <div class="modal fade" tabindex="-1" role="dialog" id="deleteModal">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <div class="modal-title">Eliminación de registro</div>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <p>
+                              Se eliminará el registro de <b class="fw-bold">
+                                <%= itemcompra.nombre %>
+                              </b><br />
+                              Estás seguro?
+                            </p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <form action="<%= itemcompra._id %>?_method=DELETE" method="POST" class="position-relative">
+                              <button type="submit" class="btn btn-primary">SI, Eliminar</button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+              </div>
+
+          </div>
+
+
+          <%- include ('../partials/_footer.ejs') %>
+    </main>
+    <div class="fixed-plugin">
+      <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
+        <i class="bi bi-gear-fill py-2"> </i>
+      </a>
+      <div class="card shadow-lg ">
+        <div class="card-header pb-0 pt-3 ">
+          <div class="float-start">
+            <h5 class="mt-3 mb-0">Configuracion</h5>
+            <p>Personaliza tu dashboard.</p>
+          </div>
+          <div class="float-end mt-4">
+            <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+              <i class="bi bi-x-circle-fill"></i>
+            </button>
+          </div>
+          <!-- End Toggle Button -->
+        </div>
+        <hr class="horizontal dark my-1">
+        <div class="card-body pt-sm-3 pt-0">
+          <!-- Sidebar Backgrounds -->
+          <div>
+            <h6 class="mb-0">Color Barra lateral</h6>
+          </div>
+          <a href="javascript:void(0)" class="switch-trigger background-color">
+            <div class="badge-colors my-2 text-start">
+              <span class="badge filter bg-gradient-primary active" data-color="primary"
+                onclick="sidebarColor(this)"></span>
+              <span class="badge filter bg-gradient-dark" data-color="dark" onclick="sidebarColor(this)"></span>
+              <span class="badge filter bg-gradient-info" data-color="info" onclick="sidebarColor(this)"></span>
+              <span class="badge filter bg-gradient-success" data-color="success" onclick="sidebarColor(this)"></span>
+              <span class="badge filter bg-gradient-warning" data-color="warning" onclick="sidebarColor(this)"></span>
+              <span class="badge filter bg-gradient-danger" data-color="danger" onclick="sidebarColor(this)"></span>
+            </div>
+          </a>
+          <!-- Sidenav Type -->
+          <div class="mt-3">
+            <h6 class="mb-0">Tipo de barra lateral</h6>
+            <p class="text-sm">Selecciona un tipo de barra</p>
+          </div>
+          <div class="d-flex">
+            <button class="btn bg-gradient-primary w-100 px-3 mb-2 active" data-class="bg-transparent"
+              onclick="sidebarType(this)">Transparente</button>
+            <button class="btn bg-gradient-primary w-100 px-3 mb-2 ms-2" data-class="bg-white"
+              onclick="sidebarType(this)">Blanco</button>
+
+          </div>
+          <p class="text-sm d-xl-none d-block mt-2"></p>
+          <!-- Navbar Fixed -->
+          <div class="mt-3">
+            <h6 class="mb-0">Barra superior fija</h6>
+          </div>
+          <div class="form-check form-switch ps-0">
+            <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed" onclick="navbarFixed(this)">
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!--   Core JS Files   -->
+    <script type="text/javascript">
+
+      function readSingleFile(e) {
+        const name = e[0].name;
+        document.getElementById("file-label").textContent = name;
+      }
+
+
+      function configuracionesvisible() {
+        document.getElementById("configuracionesinvisible").hidden = true;
+        document.getElementById("configuracionesvisible").hidden = false;
+        document.getElementById("configuracionesvisible1").hidden = false;
+      }
+
+      function configuracionesinvisible() {
+        document.getElementById("configuracionesinvisible").hidden = false;
+        document.getElementById("configuracionesvisible").hidden = true;
+        document.getElementById("configuracionesvisible1").hidden = true;
+      }
+
+
+      function sockvisible() {
+        document.getElementById("stockinvisible").hidden = true;
+        document.getElementById("stockvisible").hidden = false;
+        document.getElementById("stockvisible1").hidden = false;
+      }
+
+      function sockinvisible() {
+        document.getElementById("stockinvisible").hidden = false;
+        document.getElementById("stockvisible").hidden = true;
+        document.getElementById("stockvisible1").hidden = true;
+      }
+      function textosvisible() {
+        document.getElementById("textosinvisible").hidden = true;
+        document.getElementById("textosvisible").hidden = false;
+        document.getElementById("textosvisible1").hidden = false;
+      }
+
+      function textosinvisible() {
+        document.getElementById("textosinvisible").hidden = false;
+        document.getElementById("textosvisible").hidden = true;
+        document.getElementById("textosvisible1").hidden = true;
+      }
+
+
+
+
+      window.onbeforeunload = function () {
+        var scrollPos;
+        if (typeof window.pageYOffset != 'undefined') {
+          scrollPos = window.pageYOffset;
+        }
+        else if (typeof document.compatMode != 'undefined' && document.compatMode != 'BackCompat') {
+          scrollPos = document.documentElement.scrollTop;
+        }
+        else if (typeof document.body != 'undefined') {
+          scrollPos = document.body.scrollTop;
+        }
+        document.cookie = "scrollTop=" + scrollPos + "URL=" + window.location.href;
+      }
+
+      window.onload = function () {
+        actualizarindicator()
+        actualizaritem()
+        actualizarconfiguraciones()
+        if (document.cookie.includes(window.location.href)) {
+          if (document.cookie.match(/scrollTop=([^;]+)(;|$)/) != null) {
+            var arr = document.cookie.match(/scrollTop=([^;]+)(;|$)/);
+            document.documentElement.scrollTop = parseInt(arr[1]);
+            document.body.scrollTop = parseInt(arr[1]);
+          }
+        }
+      }
+
+
+      function stopDefault(event) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      function dragOver(label, text) {
+        /* ADD ALMOST ANY STYLING YOU LIKE */
+        label.style.animationName = "dropbox";
+        label.innerText = text;
+      }
+      function dragLeave(label) {
+        /* THIS SHOULD REMOVE ALL STYLING BY dragOver() */
+        var len = label.style.length;
+        for (var i = 0; i < len; i++) {
+          label.style[label.style[i]] = "";
+        }
+        label.innerText = "Arrastre archivos aqui o presione para seleccionar";
+      }
+      function addFilesAndSubmit(event) {
+        var files = event.target.files || event.dataTransfer.files;
+        document.getElementById("filesfld").files = files;
+        submitFilesForm(document.getElementById("filesfrm"));
+      }
+      function submitFilesForm(form) {
+        var label = document.getElementById("fileslbl");
+        dragOver(label, "Subiendo archivos..."); // set the drop zone text and styling
+        var fd = new FormData();
+        for (var i = 0; i < form.filesfld.files.length; i++) {
+          var field = form.filesfld;
+          fd.append(field.name, field.files[i], field.files[i].name);
+        }
+        var progress = document.getElementById("progress");
+        var x = new XMLHttpRequest();
+        if (x.upload) {
+          x.upload.addEventListener("progress", function (event) {
+            var percentage = parseInt(event.loaded / event.total * 100);
+            progress.innerText = progress.style.width = "Progreso: " + percentage + "%";
+          });
+        }
+        x.onreadystatechange = function () {
+          if (x.readyState == 4) {
+            progress.innerText = progress.style.width = "";
+            form.filesfld.value = "";
+            dragLeave(label); // this will reset the text and styling of the drop zone
+            if (x.status == 200) {
+              var images = JSON.parse(x.responseText);
+            console.log(images)
+              let imagescant = String(images).split(',');
+              let strcant = "";
+              let descr = "";
+              document.getElementById("archivos-cant").value = imagescant.length
+              for (let i = 0; i < imagescant.length; i++) {
+                if (i == 0) { strcant = "false"; descr = "S/D" }
+                else {
+                  strcant = strcant + ",false"; descr = descr + ",S/D"
+                }
+              }
+
+             
+              var archivos = document.getElementById("archivos-0").value;
+              if (archivos == "") { archivos = images; }
+              else {
+                archivos = archivos + "," + images;
+              }
+              let files = archivos
+              document.getElementById("archivos-0").value = archivos
+
+              archivos = document.getElementById("archivos-1").value;
+              if (archivos == "") { archivos = descr; }
+              else {
+                archivos = archivos + "," + descr;
+              }
+              files = files + ";" + archivos
+              document.getElementById("archivos-1").value = archivos
+
+              archivos = document.getElementById("archivos-2").value;
+              if (archivos == "") { archivos = strcant; }
+              else {
+                archivos = archivos + "," + strcant;
+              }
+              files = files + ";" + archivos
+              document.getElementById("archivos-2").value = archivos
+
+              archivos = document.getElementById("archivos-3").value;
+              if (archivos == "") { archivos = strcant; }
+              else {
+                archivos = archivos + "," + strcant;
+              }
+              files = files + ";" + archivos
+              document.getElementById("archivos-3").value = archivos
+
+              archivos = document.getElementById("archivos-4").value;
+              if (archivos == "") { archivos = strcant; }
+              else {
+                archivos = archivos + "," + strcant;
+              }
+              files = files + ";" + archivos
+              document.getElementById("archivos-4").value = archivos
+
+              archivos = document.getElementById("archivos-5").value;
+              if (archivos == "") { archivos = strcant; }
+              else {
+                archivos = archivos + "," + strcant;
+              }
+              files = files + ";" + archivos
+              document.getElementById("archivos-5").value = archivos
+
+              archivos = document.getElementById("archivos-6").value;
+              if (archivos == "") { archivos = strcant; }
+              else {
+                archivos = archivos + "," + strcant;
+              }
+              files = files + ";" + archivos
+              document.getElementById("archivos-6").value = archivos
+
+              archivos = document.getElementById("archivos-7").value;
+              if (archivos == "") { archivos = strcant; }
+              else {
+                archivos = archivos + "," + strcant;
+              }
+              files = files + ";" + archivos
+              document.getElementById("archivos-7").value = archivos
+
+              archivos = document.getElementById("archivos-8").value;
+              if (archivos == "") { archivos = strcant; }
+              else {
+                archivos = archivos + "," + strcant;
+              }
+              files = files + ";" + archivos
+              document.getElementById("archivos-8").value = archivos
+
+              archivos = document.getElementById("archivos-9").value;
+              if (archivos == "") { archivos = strcant; }
+              else {
+                archivos = archivos + "," + strcant;
+              }
+              files = files + ";" + archivos
+              document.getElementById("archivos-9").value = archivos
+
+              archivos = document.getElementById("archivos-10").value;
+              if (archivos == "") { archivos = strcant; }
+              else {
+                archivos = archivos + "," + strcant;
+              }
+              files = files + ";" + archivos
+              document.getElementById("archivos-10").value = archivos
+
+              archivos = document.getElementById("archivos-11").value;
+              if (archivos == "") { archivos = strcant; }
+              else {
+                archivos = archivos + "," + strcant;
+              }
+              document.getElementById("archivos-11").value = archivos
+
+              archivos = document.getElementById("archivos-12").value;
+              if (archivos == "") { archivos = strcant; }
+              else {
+                archivos = archivos + "," + strcant;
+              }
+              files = files + ";" + archivos
+              document.getElementById("archivos-12").value = archivos
+
+              archivos = document.getElementById("archivos-13").value;
+              if (archivos == "") { archivos = strcant; }
+              else {
+                archivos = archivos + "," + strcant;
+              }
+              files = files + ";" + archivos
+              document.getElementById("archivos-13").value = archivos
+
+              archivos = document.getElementById("archivos-14").value;
+              if (archivos == "") { archivos = strcant; }
+              else {
+                archivos = archivos + "," + strcant;
+              }
+              files = files + ";" + archivos
+              document.getElementById("archivos-14").value = archivos
+
+              archivos = document.getElementById("archivos-15").value;
+              if (archivos == "") { archivos = strcant; }
+              else {
+                archivos = archivos + "," + strcant;
+              }
+              files = files + ";" + archivos
+              document.getElementById("archivos-15").value = archivos
+
+              files = files + ";" + archivos
+              document.getElementById("files_upload").value = files
+             
+
+
+
+              for (var i = 0; i < images.length; i++) {
+                var img = document.createElement("img");
+                img.src = images[i];
+                document.body.appendChild(img);
+              }
+            }
+            else {
+              // failed - TODO: Add code to handle server errors
+            }
+          }
+          actualizararchivos();
+        };
+
+        x.open("post", form.action, true);
+        x.send(fd);
+        return false;
+      }
+    </script>
+
+    <script>
+
+      function agregarconfiguracion() { 
+        if (confirm('Está seguro de crear una nueva configuración?')) {
+          let nuevaconfiguracion = document.getElementById('nuevaconfiguracion').value;
+        let string01 = document.getElementById('string01').value;
+        string01 = string01 + ';' + nuevaconfiguracion
+        document.getElementById('string01').value = string01
+        document.getElementById('nuevaconfiguracion').value = ""
+       
+        actualizarconfiguraciones()
+} else {
+  // Do nothing!
+
+}
+       
+      }
+
+      function actualizarconfiguraciones() {
+        let string01 = document.getElementById('string01').value;
+        let arr = string01.split(";")
+        
+        let text = ""
+        for (i = 0; i < arr.length; i++) {
+          if(arr[i]==""){arr[i]="STD"}
+          text = text + "<tr> <td> <h6 style='text-align: center; color: black;'>" + i + "</h6> </td><td><input id='conf_" + i + "' size='30' value='" + arr[i] + "' onchange='actualizarnombreconfiguraciones()' ></td></tr> "
+        }
+     
+        document.getElementById('configuraciones').innerHTML = text
+        
+      }
+      function actualizarnombreconfiguraciones() {
+        let string01 = document.getElementById('string01').value;
+        let arr = string01.split(";")
+        let text = ""
+        for (i = 0; i < arr.length; i++) {
+          let conf = document.getElementById('conf_'+i).value;
+          if(i==0){text = conf}else{text = text+";" +conf}
+      }
+     
+      document.getElementById('string01').value = text
+      actualizarconfiguraciones()
+    }
+
+
+
+
+
+
+      actualizararchivos();
+      let temp = document.getElementById('unidad').value;
+      let mySelect = document.getElementById('unidadSelect');
+     
+      for (var i, j = 0; i = mySelect.options[j]; j++) {
+        if (i.text == temp) {
+          mySelect.selectedIndex = j;
+          break;
+        }
+      }
+
+
+
+      function updateFiles() {
+        
+        let text = ""
+        let cant = document.getElementById("archivos-cant").value
+        let texto = document.getElementById("archivos-0").value;
+        for (j = 1; j < 16; j++) {
+          for (i = 0; i < cant; i++) {
+
+
+            if (j == 1) {
+            
+              if (i == 0) {
+                text = document.getElementById('file' + j + '_' + i).value;
+              } else {
+                text = text + "," + document.getElementById('file' + j + '_' + i).value;
+              }
+            }
+            if (j > 1) {
+        
+              if (i == 0) {
+                text = document.getElementById('file' + j + '_' + i).checked;
+              }
+              else {
+                text = text + "," + document.getElementById('file' + j + '_' + i).checked;
+              }
+            }
+
+          }
+
+          texto = texto + ";" + text
+          text = ""
+       
+        }
+      
+        document.getElementById("files_upload").value = texto
+      }
+
+      function actualizararchivos() {
+        let archivo = document.getElementById("files_upload").value;
+    
+        if (archivo == "") {
+       
+          document.getElementById("archivos-cant").value = 0
+          document.getElementById("archivos-0").value = ""
+          document.getElementById("archivos-1").value = ""
+          document.getElementById("archivos-2").value = ""
+          document.getElementById("archivos-3").value = ""
+          document.getElementById("archivos-4").value = ""
+          document.getElementById("archivos-5").value = ""
+          document.getElementById("archivos-6").value = ""
+          document.getElementById("archivos-7").value = ""
+          document.getElementById("archivos-8").value = ""
+          document.getElementById("archivos-9").value = ""
+          document.getElementById("archivos-10").value = ""
+          document.getElementById("archivos-11").value = ""
+          document.getElementById("archivos-12").value = ""
+          document.getElementById("archivos-13").value = ""
+          document.getElementById("archivos-14").value = ""
+          document.getElementById("archivos-15").value = ""
+
+
+
+        }
+        else {
+
+          let archivos = String(archivo).split(';');
+    
+          document.getElementById("archivos-0").value = archivos[0]
+          document.getElementById("archivos-1").value = archivos[1]
+          document.getElementById("archivos-2").value = archivos[2]
+          document.getElementById("archivos-3").value = archivos[3]
+          document.getElementById("archivos-4").value = archivos[4]
+          document.getElementById("archivos-5").value = archivos[5]
+          document.getElementById("archivos-6").value = archivos[6]
+          document.getElementById("archivos-7").value = archivos[7]
+          document.getElementById("archivos-8").value = archivos[8]
+          document.getElementById("archivos-9").value = archivos[9]
+          document.getElementById("archivos-10").value = archivos[10]
+          document.getElementById("archivos-11").value = archivos[11]
+          document.getElementById("archivos-12").value = archivos[12]
+          document.getElementById("archivos-13").value = archivos[13]
+          document.getElementById("archivos-14").value = archivos[14]
+          document.getElementById("archivos-15").value = archivos[14]
+
+          let cantdatos = String(archivos[0]).split(',');
+
+          document.getElementById("archivos-cant").value = cantdatos.length
+          var d = new Array(archivos.length);
+          for (var i = 0; i < archivos.length; i++) {
+            d[i] = new Array(cantdatos.length);
+          }
+
+        
+          for (let i = 0; i < archivos.length; i++) {
+            let datos = String(archivos[i]).split(',');
+            for (let j = 0; j < cantdatos.length; j++) {
+              if (i == 0) {
+                datosaux = String(datos[j]).split('_$_');
+                datos[j] = '<a id="file' + i + '_' + j + '" href="/upload_files/_$$_' + datos[j] + '">' + datosaux[1] + '</a>'
+              }
+
+              if (i == 1) {
+                datos[j] = '<input id="file' + i + '_' + j + '" href="/upload_files/_$$_' + datos[j] + '" type="text" value="' + datos[j] + '" onchange="updateFiles(' + i + ',' + j + ') ">'
+              }
+
+              if (i > 1) {
+                if (datos[j] == "false") {
+                  datos[j] = '<input id="file' + i + '_' + j + '" href="/upload_files/_$$_' + datos[j] + '" type="checkbox" onchange="updateFiles(' + i + ',' + j + ') " >'
+                }
+                else {
+                  datos[j] = '<input id="file' + i + '_' + j + '" href="/upload_files/_$$_' + datos[j] + '" type="checkbox" onchange="updateFiles(' + i + ',' + j + ') " checked>'
+                }
+              }
+
+              d[i][j] = datos[j]
+           
+            }
+          }
+     
+          var textaction = ""
+          var text = ""
+          var text1 = ""
+          for (let j = 0; j < cantdatos.length; j++) {
+            for (let i = 0; i < archivos.length; i++) {
+              text = text + "<td class=' text-secondary text-xs font-weight-bolder text-black-100 col-1'>" + d[i][j] + "</td>  "
+            }
+            textaction = "<td class=' text-secondary text-xs font-weight-bolder text-black-100 col-1'>  <a type='btn btn-info boton-color' onclick=' deleteFiles(" + j + ")'> <i class='bi bi-trash'> </i> </a> </td> "
+            text1 = text1 + "<tr>" + text + textaction + "</tr>"
+            text = ""
+          }
+     
+        }
+        document.getElementById("archivoslista").innerHTML = text1
+
+
+
+
+
+      }
+
+      function deleteFiles(jj) {
+    
+        let borrararchivo = confirm("¿Desea eliminar archivo?");
+        if (borrararchivo) {
+        
+          var text = ""
+          var text1 = ""
+          var archivo = document.getElementById("files_upload").value;
+          var archivoColumnas = String(archivo).split(';');
+        
+          for (i = 0; i < archivoColumnas.length; i++) {
+           
+            var archivos = String(archivoColumnas[i]).split(',');
+           
+            for (j = 0; j < archivos.length; j++) {
+           
+              if (j == jj) { }
+              else {
+               
+                if (text == "") { text = archivos[j] }
+                else { text = text + "," + archivos[j] }
+              }
+            }
+            if (text1 == "") { text1 = text }
+            else {
+              text1 = text1 + ";" + text
+            }
+            text = ""
+          }
+     
+          document.getElementById("files_upload").value = text1
+          actualizararchivos()
+        }
+  
+      }
+
+      function actualizarindicator() {
+        let cantitemstrig = "0"
+        let costo = 0
+        let factorprecioventa = 1
+        let precioventa = 0
+        let cant = document.getElementById("indicatortotal").value;
+    
+        for (let i = 0; i < cant; i++) {
+          let e = document.getElementById("ee" + i).innerHTML
+          let a = parseFloat(document.getElementById("bb" + i).value);
+          let b = parseFloat(document.getElementById("cc" + i).innerHTML);
+          console.log(i+"--"+a+"--"+b)
+          cantitemstrig = cantitemstrig + "," + a
+          if (e.indexOf("Factor") != -1) {
+            factorprecioventa = factorprecioventa * (a * b)
+        
+          }
+          else {
+            costo = costo + (a * b)
+        
+          }
+          //console.log(i+"--"+a+"--"+b+"---"+factorprecioventa+"---"+costo)
+
+        }
+        console.log(costo+"--"+precioventa+"--"+cantitemstrig)
+        document.getElementById('costopropio').value = parseInt(costo*100)/100
+        let costoitemagregados = parseFloat(document.getElementById('costoitemsagregados').value)
+        costo = costo + costoitemagregados
+        precioventa = costo * factorprecioventa
+        costo=parseInt(costo*100)/100
+        document.getElementById('costoarbol').value = costo
+        document.getElementById('costoarbol1').value = costo
+        precioventa=parseInt(precioventa*100)/100
+        document.getElementById('precioventa').value = precioventa
+        document.getElementById('precioventa1').value = precioventa
+        document.getElementById('numero01').value = precioventa
+        document.getElementById('indicatoragregadocant').value = cantitemstrig
+        console.log(costo+"--"+precioventa+"--"+cantitemstrig)
+      }
+
+      function ordenaritem() {
+     
+        let cant = document.getElementById("itemtotal").value;
+        let id = document.getElementById("_id").value;
+        let ii = 0
+        let aa = 0
+        let a = 0
+        for (let i = 0; i < cant; i++) {
+          a = parseFloat(document.getElementById("ao" + i).value);
+       
+          if (a != (i + 1)) { ii = i + 1; aa = a }
+        }
+
+     
+        let _datos = {
+          origen: ii,
+          destino: aa
+        }
+     
+        let url = '../ordenaritems/' + ii + ',' + aa + ',' + id
+
+        fetch(url, {
+          method: "GET",
+
+          headers: { "Content-type": "application/json; charset=UTF-8" }
+        })
+
+        setTimeout(function () {
+          location.reload()
+        }, 500);
+
+      }
+
+      function actualizaritem() {
+        let activo= "0"
+        let cantitemstrig = "0"
+        let juntoitemstrig = "0"
+        let costo = 0
+        let cant = document.getElementById("itemtotal").value;  
+        for (let i = 0; i < cant; i++) {
+          let a = parseFloat(document.getElementById("aa" + i).value);
+          let b = parseFloat(document.getElementById("dd" + i).innerHTML);
+          let c = document.getElementById("ag" + i).value;
+          let d = document.getElementById("ac_" + i).checked;
+          if (d==true){f="true"}else{f="false"}
+          juntoitemstrig = juntoitemstrig + "," + c
+          cantitemstrig = cantitemstrig + "," + a
+          activo=activo+ "," +f
+          costo = costo + a * b
+        }
+        costo = parseInt(costo*100)/100
+        document.getElementById('itemagregadojunto').value = juntoitemstrig
+        document.getElementById('itemagregadocant').value = cantitemstrig
+        document.getElementById('costoitemsagregados').value = costo
+        document.getElementById('activoitemsagregados').value = activo
+        let costopropio = parseInt((document.getElementById('costopropio').value)*100)/100
+        costo = costo + costopropio
+        document.getElementById('costoarbol').value = costo
+        actualizarindicator()
+        
+      }
+      function oprubro() {
+        const rubros = document.getElementById("seltipo").value;
+        const tipoaux = document.getElementById("seltipo").innerText;
+        let arr = rubros.split(',');
+        let op = ' '
+        const a = ' <option name="rubroitem" value="'
+        const b = '">'
+        const c = '</option>"'
+        const list = document.getElementById("oprubros");
+        const tipo = document.getElementById("tipoitem");
+        for (let i = 1; i < arr.length; i++) {
+          op = op + a + arr[i] + b + arr[i] + c
+        }
+      
+        list.innerHTML = op
+        tipo.value = arr[0]
+      }
+
+      actualizaritem()
+      actualizarindicator()
+      var ctx = document.getElementById("chart-bars").getContext("2d");
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+          datasets: [{
+            label: "Sales",
+            tension: 0.4,
+            borderWidth: 0,
+            borderRadius: 4,
+            borderSkipped: false,
+            backgroundColor: "#fff",
+            data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
+            maxBarThickness: 6
+          },],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false,
+            }
+          },
+          interaction: {
+            intersect: false,
+            mode: 'index',
+          },
+          scales: {
+            y: {
+              grid: {
+                drawBorder: false,
+                display: false,
+                drawOnChartArea: false,
+                drawTicks: false,
+              },
+              ticks: {
+                suggestedMin: 0,
+                suggestedMax: 500,
+                beginAtZero: true,
+                padding: 15,
+                font: {
+                  size: 14,
+                  family: "Open Sans",
+                  style: 'normal',
+                  lineHeight: 2
+                },
+                color: "#fff"
+              },
+            },
+            x: {
+              grid: {
+                drawBorder: false,
+                display: false,
+                drawOnChartArea: false,
+                drawTicks: false
+              },
+              ticks: {
+                display: false
+              },
+            },
+          },
+        },
+      });
+
+
+      var ctx2 = document.getElementById("chart-line").getContext("2d");
+      var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
+      gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
+      gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+      gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
+      var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
+      gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
+      gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+      gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
+      new Chart(ctx2, {
+        type: "line",
+        data: {
+          labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+          datasets: [{
+            label: "Mobile apps",
+            tension: 0.4,
+            borderWidth: 0,
+            pointRadius: 0,
+            borderColor: "#cb0c9f",
+            borderWidth: 3,
+            backgroundColor: gradientStroke1,
+            fill: true,
+            data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+            maxBarThickness: 6
+
+          },
+          {
+            label: "Websites",
+            tension: 0.4,
+            borderWidth: 0,
+            pointRadius: 0,
+            borderColor: "#3A416F",
+            borderWidth: 3,
+            backgroundColor: gradientStroke2,
+            fill: true,
+            data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
+            maxBarThickness: 6
+          },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false,
+            }
+          },
+          interaction: {
+            intersect: false,
+            mode: 'index',
+          },
+          scales: {
+            y: {
+              grid: {
+                drawBorder: false,
+                display: true,
+                drawOnChartArea: true,
+                drawTicks: false,
+                borderDash: [5, 5]
+              },
+              ticks: {
+                display: true,
+                padding: 10,
+                color: '#b2b9bf',
+                font: {
+                  size: 11,
+                  family: "Open Sans",
+                  style: 'normal',
+                  lineHeight: 2
+                },
+              }
+            },
+            x: {
+              grid: {
+                drawBorder: false,
+                display: false,
+                drawOnChartArea: false,
+                drawTicks: false,
+                borderDash: [5, 5]
+              },
+              ticks: {
+                display: true,
+                color: '#b2b9bf',
+                padding: 20,
+                font: {
+                  size: 11,
+                  family: "Open Sans",
+                  style: 'normal',
+                  lineHeight: 2
+                },
+              }
+            },
+          },
+        },
+      });
+    </script>
+    <script>
+      var win = navigator.platform.indexOf('Win') > -1;
+      if (win && document.querySelector('#sidenav-scrollbar')) {
+        var options = {
+          damping: '0.5'
+        }
+        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+      }
+    </script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="../js/soft-ui-dashboard.min.js?v=1.0.7"></script>
+</body>
+
+</html>
