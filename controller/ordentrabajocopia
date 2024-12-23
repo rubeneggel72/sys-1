@@ -1,0 +1,73 @@
+
+// Reservas y entregas de productos terminados en esta orden de trabajo
+// Reservas y entregas de productos terminados en esta orden de trabajo
+// Reservas y entregas de productos terminados en esta orden de trabajo
+// Reservas y entregas de productos terminados en esta orden de trabajo
+// Reservas y entregas de productos terminados en esta orden de trabajo
+let entregado = array1[0]
+let cantidad = req.body.cant
+reservaingenieria = ""
+let ce = 0
+let cant = 0
+let nv = {}
+let cant1 = 0
+nv._id = ordentrabajo0._id
+nv.idordentrabajo = ordentrabajo0.idordentrabajo
+nv.estado = arritemagregadoestado[i]
+nv.cant = arritemagregadocant[i]
+nv.entregadocant = arritementregadocant[i]
+nv.cant1 = 0
+nv.fecha = arritemagregadofecha[i]
+nv.quien = arritemagregadoquien[i]
+let res1 = ""
+
+let itemcompra = await Itemcompra.findOne({ _id: req.body._iditemcompra });
+console.log("-------" + itemcompra.iditemcompra + "-" + itemcompra.hijo)
+console.log("-------" + itemcompra.iditemcompra + "-" + itemcompra.hijo)
+console.log("-------" + itemcompra.iditemcompra + "-" + itemcompra.hijo)
+let res0 = itemcompra.reservaingenieria
+for (ent = 0; ent < todaslasentrega.length; ent++) {
+  let arrentregas = todaslasentrega[ent].split(',')
+  arent = arrentregas[5].split('$_%')
+  for (ent1 = 0; ent1 < arent.length; ent1++) {
+    arent1 = arent[ent1].split('*-*')
+    if ((arent1[2] == itemcompra.iditemcompra) && (arent1[3] == itemcompra.hijo)) {
+      ce = ce + parseFloat(arent1[0])
+      }
+  }
+}
+if (itemagregadoentregadocant == "") {
+  itemagregadoentregadocant = "" + (parseFloat(ce))
+} else[
+  itemagregadoentregadocant = itemagregadoentregadocant + "," + (parseFloat(ce))
+]
+
+
+
+res1 = nv._id + "," + nv.idordentrabajo + "," + + "," + parseFloat(entregado) + ',' + nv.estado + "," + nv.fecha + "," + nv.quien + "," + nv.nombreorganizacion
+//console.log('res '+res)
+if (res0 != "") {
+  res1 = res1 + ";" + res0
+}
+arrres1 = res1.split(";")
+//calcula cantidad
+res1 = arrres1[0]
+//  cant=parseFloat(arrres.split(",")[2])
+for (j = 1; j < arrres1.length; j++) {
+  if (arrres1[j].includes(nv._id, 0)) { }
+  else {
+
+    res1 = res1 + ";" + arrres1[j];
+    }
+}
+cant = 0
+arrres = res1.split(";")
+for (j = 0; j < arrres.length; j++) {
+  if (arrres[j].split(",")[3])
+  
+    cant = cant + parseFloat(arrres[j].split(",")[2])
+
+}
+
+itemcompra = await Itemcompra.findOneAndUpdate({ _id: req.body._iditemcompra }, { reservaingenieria: res1, stockreservado: cant });
+
