@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+
+<br><br><br><br><br><br>
+
+
+
+
+  <div class="ventanapdf">
+    <div class="row ">
+      <div class="col-3"></div>
+            <div class="col-6 ">
+        <img width="400px" src="/logo2.jpg">
+    </div>
+  </div>
+  <br><br><br>
+  <div class="row ">
+    <div class="col-2"></div>
+          <div class="col-9 ">
+     <h1>COTIZACION:</h1>
+     <br>
+     <h1><%= notaventa.titulo %></h1>
+     <br>
+     <br>
+     <h2>COTIZACION Nº: <%= notaventa.idnotaventa %></h2>
+     <br>
+     <h3>FECHA: <%= notaventa.string03 %></h3>
+     <br><br><br>
+  </div>
+</div>
+  <div class="row ">
+    <div class="col-2"></div>
+          <div class="col-9 ">
+            <h4>
+              <%= org.razonsocial %>
+            </h4>
+            <h4>
+              <%= org.adireccion %>
+            </h4>
+            <h4>
+              <%= org.acp %>-<%= org.aciudad %>-<%=org.aprovincia%>-<%=org.apais %>
+                      </h4>
+                      <h4> Att. <%= notaventa.string02 %>
+                      </h4>
+                      <br> <br>
+                      <h4>
+                       REMITENTE:
+                      </h4>    
+                      <h4>
+                        <%= org.adireccion %>
+                      </h4>
+
+
+  </div>
+</div>
+
+<!-- 
+    <div class="row ">
+      <div class="col-2">
+        <a class="navbar-brand" href="#">
+          <img src="/img/logo2.jpg" class="navbar-brand-img" alt="" height="150" class="d-inline-block align-text-top">
+          
+        </a>
+      </div>
+      <div class="col-3">
+
+      </div>
+      <div class="col-3 d-flex align-items-center">
+        <h1>COTIZACION</h1>
+      </div>
+      <div class="col-3">
+      </div>
+
+      <div class="col-1">
+       
+      </div> -->
+    </div>
+    <div class="row ">
+      <div class="col-12 border-top border-light-subtle">
+    <br>
+  </div>
+
+    <div class="row " style="padding-left: 25px">
+
+      <div class="col-6 "> 
+        <form action="../pdfcotizacion/<%= notaventa._id %>">
+          <input type="submit" value="PDF-1" />
+          </form>
+          <form action="../pdfcotizacion2/<%= notaventa._id %>">
+            <input type="submit" value="PDF-2" />
+          </form>
+       
+      </div>
+    </div>
+   
+    </div>
+    </div>
+  </div>
+
+<footer>
+ 
+  </footer>
